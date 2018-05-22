@@ -85,6 +85,7 @@
     ```js
     app.post('/api/todos', function create(req, res) {
         // Where does the data for the new todo live?
+        
     });
     ```
 </details>

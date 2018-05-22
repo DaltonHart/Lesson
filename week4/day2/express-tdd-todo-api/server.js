@@ -48,12 +48,16 @@ app.get('/api/todos/search', (req, res) => {
   /* This endpoint responds with the search results from the
    * query in the request. COMPLETE THIS ENDPOINT LAST.
    */
+  var query = req.query.q;
+  results = todos.filter( todo => todo.task === query)
+  res.json({data:results});
 });
 
 // Index
 app.get('/api/todos', (req, res) => {
   /* This endpoint responds with all of the todos
    */
+  res.json({data : todos});
 });
 
 // Create
@@ -61,6 +65,15 @@ app.post('/api/todos', (req, res) => {
   /* This endpoint will add a todo to our "database"
    * and respond with the newly created todo.
    */
+  let newTodo = {
+    _id: todos.length,
+    'task': req.body.task,
+    'description': req.body.description
+    
+  }
+  todos.push(newTodo);
+    res.send(newTodo);
+
 });
 
 // Show
@@ -68,6 +81,11 @@ app.get('/api/todos/:id', (req, res) => {
   /* This endpoint will return a single todo with the
    * id specified in the route parameter (:id)
    */
+  var todoId = parseInt(req.params.id);
+  var foundTodo = todos.filter(function (todo) {
+      return todo._id == todoId;
+    })[0];
+  res.json({'data':foundTodo});
 });
 
 // Update
@@ -76,6 +94,14 @@ app.put('/api/todos/:id', (req, res) => {
    * id specified in the route parameter (:id) and respond
    * with the newly updated todo.
    */
+  let updateBody = req.body
+  let targetID = parseInt(req.params.id)
+  todos.forEach(todo => {
+    if(todo._id === targetID){
+      todo.task = updateBody.description
+      res.json(todo)
+    }
+  })
 });
 
 // Destroy
@@ -84,6 +110,9 @@ app.delete('/api/todos/:id', (req, res) => {
    * id specified in the route parameter (:id) and respond
    * with success.
    */
+  let targetID = parseInt(req.params.id)
+  todos = todos.filter(todo => todo._id !== targetID)
+  res.sendStatus(200);
 });
 
 /**********
