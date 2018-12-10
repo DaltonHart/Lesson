@@ -1,0 +1,14 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "week2/day2/js-functions/exercises/google-shopping-functions/package.json",
+        "week4/day1/express-dynamic-routes/sample-code/package.json",
+        "week4/day2/express-tdd-todo-api/package.json",
+        "week4/day2/mongoose-book-app/package.json",
+        "week4/day3/mongoose-book-app/package.json",
+        "week8/day3/react-router-intro/package.json"
+      ]
+    }
+  }
+}
